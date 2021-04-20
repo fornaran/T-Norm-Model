@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- Autore: Nicoletta Fornara -->
+<!-- Data di creazione: 26/1/2004 -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="home page" />
+<meta name="description" content="home page di Nicoletta Fornara" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet"	href="..\stile.css"	type="text/css" />
+
+<title>OWL Event Ontology and OWL Norm Ontology</title>
+</head>
+
+<body>
+<div id="container">
+<img class="floatleft" src="../Nicky.jpg" border="0" alt="Nicoletta Image" />
+
+<div id="top">
+    <h2>Nicoletta Fornara, PhD</h2>
+    <h4>
+    <a href="http://www.usi.ch"> Universit&agrave; della Svizzera Italiana</a> (USI),
+    <a href="https://www.com.usi.ch/en">Faculty of Communication, Culture and Society</a><br />
+    Via Giuseppe Buffi, 13, 6900 Lugano, Switzerland, Main Building, Office 414 (Level 4)<br />
+	Tel +41 (0)58 666 45 13, nicoletta.fornara AT usi DOT ch <br />
+	ORCID: <a href="https://orcid.org/0000-0003-1692-880X">0000-0003-1692-880X</a>, 
+	Google Scholar <a href="http://scholar.google.it/citations?user=KdLTDBQAAAAJ&hl=en">profile</a></h4>
+</div>
+
+<div id="leftnav">
+<p>
+<h4><a href="..\index.htm">Home</a></h4>
+<h4><a href="..\publications.html">Publications</a></h4>
+<h4><a href="..\education.html">Education</a></h4>
+<h4><a href="http://usi.to/dte" target="_new">Courses and Project at USI </a></h4>
+</p>
+</div>
+
+<div id="rightnav">
+<p>
+<a href="http://webdatanet.cbs.dk/"><img src="..\WEBDATANETlogo2.png" width="90%"/></a><br/><br/>
+<a href="http://www.agreement-technologies.eu/"><img src="..\at-logo.jpg"/></a><br/><br/>
+<a href="http://www.springer.com/computer/ai/book/978-3-642-21267-3"><img src="..\COIN_VI.jpg"/></a><br/><br/>
+<a href="http://www.springer.com/computer/ai/book/978-3-540-74457-3"><img src="..\COINII.jpg"/></a>
+</p>
+</div>
+
+<div id="content">
+<h3>The T-Norm model of Norms</h3>    
+<p>The T-Norm model Norms can be used to specify norms for regulating classes of actions that should or should not be performed in a temporal interval. <br>
+It is described in the paper: <br>
+Nicoletta Fornara, Soheil Roshankish, Marco Colombetti. <br>
+A Framework for Automatic Monitoring of Norms that regulate Time Constrained Actions. <br>
+<a href="https://coin-workshop.github.io/coine-2021-london/">International Workshop on Coordination, Organizations, Institutions, Norms and Ethics for Governance of Multi-Agent Systems (COINE)</a>, 
+co-located with AAMAS 2021, London, UK, 3rd May, 2021.</p>
+
+<h3>T-Norm Ontology in OWL</h3>
+    <p>
+        The T-Norm Ontology is used to specify the norms formalized using the T-Norm model. The T-Norm Ontology is depicted in Figure 1 together with the Time Ontology and the Event Ontology. 
+        The OWL/XML serialization of the T-Norm Ontology is available at <a href="">...to be added</a>.<br>
+
+        <img src="TNormOntology.png" width="95%" alt="T-Norm Ontology and Event Ontology">
+        <figcaption>Figure 1 - The T-Norm Ontology and the Event Ontology</figcaption>
+        <br>
+    </p>
+
+<h3>Event Ontology in OWL</h3>
+<p>
+    The Event Ontology can be used to represent events and actions happening in the interaction among agents. 
+    The OWL/XML serialization of the Event Ontology is available at <a href="event.txt">event.owl</a>. <br>
+    The Event Ontology imports the W3C Candidate Recommendation <a href="https://www.w3.org/TR/owl-time/">Time Ontology in OWL</a> 
+    for connecting events to instants or intervals of time. The URL of the Turtle serialization of the Time Ontology is 
+    <a href="https://raw.githubusercontent.com/w3c/sdw/gh-pages/time/rdf/time.ttl">https://raw.githubusercontent.com/w3c/sdw/gh-pages/time/rdf/time.ttl</a><br><br>
+  
+    To be used in the formalization of concrete examples, the Event Ontology needs to be extended with a domain-specific Action Ontology that defines a hierachy 
+    of classes and a set of properties. The most general Action class of a domain-specific Action Ontology have to be defined as a subclass of the event:Action 
+    class of the Event Ontology. <br>
+    For example the Event Ontology may import the <a href="https://schema.org/docs/full.html">Schema.org</a> ontology for reusing its domain dependent hierarchy 
+    of action classes. When the Schema.org ontology is imported in the Event Ontology the <a href="">schema:Action</a> class has to be defined as subclass of the 
+    event:Action class. 
+    Useful classes defined in Schema.org are for example the <a href="https://schema.org/PlayAction">PlayAction</a> class 
+    and <a href="https://schema.org/TradeAction">TradeAction</a> class.<br>
+</p>
+
+</div>
+
+<div id="footer">
+<br/>
+</div>
+</div>
+
+</body>
+</html>
