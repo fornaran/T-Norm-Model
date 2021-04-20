@@ -1,9 +1,0 @@
-The T-Norm model of Norms
-The T-Norm model Norms can be used to specify norms for regulating classes of actions that should or should not be performed in a temporal interval.
-It is described in the paper:
-Nicoletta Fornara, Soheil Roshankish, Marco Colombetti.
-A Framework for Automatic Monitoring of Norms that regulate Time Constrained Actions.
-International Workshop on Coordination, Organizations, Institutions, Norms and Ethics for Governance of Multi-Agent Systems (COINE), co-located with AAMAS 2021, London, UK, 3rd May, 2021.
-
-T-Norm Ontology in OWL
-The T-Norm Ontology is used to specify the norms formalized using the T-Norm model. The T-Norm Ontology is depicted in Figure 1 together with the Time Ontology and the Event Ontology. The OWL/XML serialization of the T-Norm Ontology is available at ...to be added.
