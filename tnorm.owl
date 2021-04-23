@@ -1,1 +1,158 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="https://raw.githubusercontent.com/fornaran/T-Norm-Model/main/tnorm.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="https://raw.githubusercontent.com/fornaran/T-Norm-Model/main/tnorm.owl">
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>http://www.people.usi.ch/fornaran/ontology/event/1.0.0</Import>
+    <Declaration>
+        <ObjectProperty IRI="#exceptionToNorm"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#activated"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DeonticRelation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#debtor"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#exceptionToException"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#violated"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#exceptionToDR"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#fulfills"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#end"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#fulfilled"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Norm"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#violates"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#creationTime"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isGenerated"/>
+    </Declaration>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#activated"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#creationTime"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#debtor"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#end"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#exceptionToDR"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#exceptionToException"/>
+        <Class IRI="#Norm"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#exceptionToNorm"/>
+        <Class IRI="#Norm"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#fulfilled"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#fulfills"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isGenerated"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#violated"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#violates"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#activated"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#creationTime"/>
+        <Class IRI="http://www.w3.org/2006/time#Instant"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#debtor"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Agent"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#end"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#TimeEvent"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#exceptionToDR"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#exceptionToException"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#exceptionToNorm"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#fulfilled"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#fulfills"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isGenerated"/>
+        <Class IRI="#Norm"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#violated"/>
+        <Class IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event#Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#violates"/>
+        <Class IRI="#DeonticRelation"/>
+    </ObjectPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
 
