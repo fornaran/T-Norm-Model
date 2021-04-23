@@ -1,26 +1,21 @@
 <?xml version="1.0"?>
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="http://www.people.usi.ch/fornaran/ontology/event"
+     xml:base="https://github.com/fornaran/T-Norm-Model/blob/main/event"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     ontologyIRI="http://www.people.usi.ch/fornaran/ontology/event"
+     ontologyIRI="https://github.com/fornaran/T-Norm-Model/blob/main/event"
      versionIRI="http://www.people.usi.ch/fornaran/ontology/event/1.0.0">
-    <Prefix name="" IRI="http://www.people.usi.ch/fornaran/ontology/event"/>
+    <Prefix name="" IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Prefix name="time" IRI="http://www.w3.org/2006/time#"/>
-    <Prefix name="event" IRI="http://www.people.usi.ch/fornaran/ontology/event"/>
-    <Prefix name="schema" IRI="http://schema.org/"/>
+    <Prefix name="event" IRI="https://github.com/fornaran/T-Norm-Model/blob/main/event"/>
     <Import>http://www.w3.org/2006/time#2016</Import>
-    <Annotation>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">OWL-Event</Literal>
-    </Annotation>
     <Declaration>
         <Class IRI="#TimeEvent"/>
     </Declaration>
