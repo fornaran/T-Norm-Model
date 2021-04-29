@@ -15,21 +15,33 @@ THEN
    THEN	ASSERT fulfills(?agent,?dr); fulfilled(?dr,?e2)
    ELSE	ASSERT violates(?agent,?dr); violated(?dr,?tevend_n)
    
-   
-Production RULES FOR JENA:
-   [PR1_ACTIVATION_ON:
-    isSalience0()                                         //required for managing priority among rules
-    (?e1 rdf:type event:RestrictedTrafficAreaAccess) (?e1 action:vehicle ?v) (?v action:owner ?agent)
-    (?e1 event:atTime ?te1) (?te1 time:inXSDDateTimeStamp ?t1) 
-    checkTime(?t1)                                        //?t1.hour>7 a.m. AND ?t1.hour<7p.m
+
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix event: <http://www.people.usi.ch/fornaran/ontology/event#>
+@prefix time: <http://www.w3.org/2006/time#>
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+[PR1_ACTIVATION_ON:
+    isSalience0()
+
+    (?e1 rdf:type event:RestrictedTrafficAreaAccess)
+    (?e1 event:atTime ?te1)
+    (?te1 time:inXSDDateTimeStamp ?t1)
+    checkTime(?t1)
+
+    noValue(event:norm01 event:exceptionToNorm ?e1)
+
     greaterThanNow(?t1)
+
     addDeadline(?t1,"P1D"^^http://www.w3.org/2001/XMLSchema#duration,?tEnd)
     getCounter(?counter)
     uriConcat(event: obl01_ ?counter ?name)
     uriConcat(event: tCreationObl01_ ?counter ?teCreation)
     uriConcat(event: deadlineObl01_ ?counter ?teEnd)
+
     noValue(?obligation event:activated ?e1)
-    noValue(event:norm01 event:exceptionToNorm ?e1)
+
     ->
 
     (?name rdf:type event:DeonticRelation)
@@ -148,5 +160,3 @@ Production RULES FOR JENA:
     (event:norm01 event:exceptionToException ?e1)
 ]
 
-
-   
