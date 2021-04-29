@@ -1,0 +1,152 @@
+NORM Norm01
+ON ?e1
+   WHERE RestrictedTrafficAreaAccess(?e1) AND vehicle(?e1,?v) AND
+   owner(?v,?agent) AND atTime(?e1,?inst1) AND
+   inXSDDateTimeStamp(?inst1,?t1) AND ?t1.hour>7 a.m. AND ?t1.hour<7p.m
+THEN
+   COMPUTE ?tend_n.hour=?t1.hour+24
+   CREATE  DeonticRelation(?dr);TimeEvent(?tevend_n);Instant(?instend_n);
+   ASSERT  isGenerated(?dr,Norm01);activated(?dr,?e1);debtor(?dr,?agent);
+           end(?dr,?tevend_n); atTime(?tevend_n,?instend_n);
+           inXSDDateTimeStamp(?instend_n,?tend_n);
+   ON  ?e2  BEFORE ?tevend_n
+      WHERE PayAction(?e2) AND reason(?e2,?e1) AND recipient(?e2,'Milan')
+      AND price(?e2,6) AND priceCurrency(?e2,euro)
+   THEN	ASSERT fulfills(?agent,?dr); fulfilled(?dr,?e2)
+   ELSE	ASSERT violates(?agent,?dr); violated(?dr,?tevend_n)
+   
+   
+Production RULES FOR JENA:
+   [PR1_ACTIVATION_ON:
+    isSalience0()                                         //required for managing priority among rules
+    (?e1 rdf:type event:RestrictedTrafficAreaAccess) (?e1 action:vehicle ?v) (?v action:owner ?agent)
+    (?e1 event:atTime ?te1) (?te1 time:inXSDDateTimeStamp ?t1) 
+    checkTime(?t1)                                        //?t1.hour>7 a.m. AND ?t1.hour<7p.m
+    greaterThanNow(?t1)
+    addDeadline(?t1,"P1D"^^http://www.w3.org/2001/XMLSchema#duration,?tEnd)
+    getCounter(?counter)
+    uriConcat(event: obl01_ ?counter ?name)
+    uriConcat(event: tCreationObl01_ ?counter ?teCreation)
+    uriConcat(event: deadlineObl01_ ?counter ?teEnd)
+    noValue(?obligation event:activated ?e1)
+    noValue(event:norm01 event:exceptionToNorm ?e1)
+    ->
+
+    (?name rdf:type event:DeonticRelation)
+    (?name event:isGenerated event:norm01)
+    (?name event:activated ?e1)
+
+    (?teCreation rdf:type time:Instant)
+    (?teCreation time:inXSDDateTimeStamp ?t1)
+    (?name event:creationTime ?teCreation)
+
+    (?teEnd rdf:type time:Instant)
+    (?teEnd time:inXSDDateTimeStamp ?tEnd)
+    (?name event:end ?teEnd)
+
+]
+
+[PR2_FULFILL_ON:
+    isSalience0()
+
+    (?dr rdf:type event:DeonticRelation)
+    (?dr event:creationTime ?teCreation)
+    (?teCreation time:inXSDDateTimeStamp ?tCreation)
+    (?dr event:end ?teEnd)
+    (?teEnd time:inXSDDateTimeStamp ?tEnd)
+
+    (?obl01n event:activation ?e1)
+    (?e1 rdf:type event:RestrictedTrafficAreaAccess)
+
+    (?payment rdf:type event:Payment)
+    (?payment event:reason ?e1)
+    (?payment event:atTime ?tePayment)
+    (?tePayment time:inXSDDateTimeStamp ?tPayment)
+
+    greaterThan(?tPayment ?tEvent)
+    lessThan(?tPayment ?deadline)
+    noValue(?event event:fulfillment)
+
+    (?e1 event:hasVehicle ?vehicle)
+    (?vehicle event:vehicleOwner ?agent)
+
+    greaterThanNow(?tPayment)
+    getNow(?now)
+
+    ->
+
+    (?agent event:fulfills ?dr)
+    (?dr event:fulfilled ?now)
+]
+
+[PR3_VIOLATE_ON:
+    isSalience0()
+
+    (?dr rdf:type event:DeonticRelation)
+    (?dr event:creationTime ?teCreation)
+    (?teCreation time:inXSDDateTimeStamp ?tCreation)
+    (?dr event:end ?teEnd)
+    (?teEnd time:inXSDDateTimeStamp ?tEnd)
+
+    (?now rdf:type event:Now)
+    (?now event:in_XSD_Date-Time ?tNow)
+    greaterThan(?tNow ?deadline)
+
+    (?obl01n event:activation ?event)
+    (?event rdf:type event:RestrictedTrafficAreaAccess)
+    (?event event:hasVehicle ?vehicle)
+    (?vehicle event:vehicleOwner ?agent)
+
+    noValue(?obl01n event:fulfillment)
+
+    greaterThanNow(?tEnd)
+    getNow(?now)
+
+    ->
+
+    (?agent event:violates ?dr)
+    (?dr event:violated ?now)
+]
+
+[EXCEPTION01:
+    isSalience1()
+
+    (?e1 rdf:type event:RestrictedTrafficAreaAccess)
+    (?e1 event:atTime ?te1)
+    (?te1 time:inXSDDateTimeStamp ?t1)
+    checkTime(?t1)
+
+    (?e1 event:hasVehicle ?vehicle)
+    (?vehicle event:vehicleOwner event:Billy)
+
+    noValue(event:norm01 event:exceptionToException ?e1)
+
+    greaterThanNow(?t1)
+
+    ->
+
+    (event:norm01 event:exceptionToNorm ?e1)
+]
+
+[EXCEPTION02:
+    isSalience2()
+
+    (?e1 rdf:type event:RestrictedTrafficAreaAccess)
+    (?e1 event:atTime ?te1)
+    (?te1 time:inXSDDateTimeStamp ?t1)
+    checkTime(?t1)
+
+    (?e1 event:hasVehicle ?vehicle)
+    (?vehicle event:vehicleOwner event:Billy)
+
+    isChristmas(?t1)
+
+    greaterThanNow(?t1)
+
+    ->
+
+    (event:norm01 event:exceptionToException ?e1)
+]
+
+
+   
