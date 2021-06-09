@@ -1,0 +1,96 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix event: <http://www.people.usi.ch/fornaran/ontology/event#>
+@prefix time: <http://www.w3.org/2006/time#>
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+@prefix schema: <http://schema.org/>
+
+
+[PRODUCTION_NORM05_ACTIVATION:
+    (?salience rdf:type event:Salience)
+    (?salience event:salienceLevel ?level)
+    equal(?level 0)
+
+    (?e1 rdf:type event:PositiveTest)
+    (?e1 event:affectedPerson ?agent)
+    (?e1 event:atTime ?inst1)
+    (?inst1 time:inXSDDateTimeStamp ?t1)
+
+    noValue(?dr event:activated ?e1)
+
+    addDeadline(?t1,"P15D"^^http://www.w3.org/2001/XMLSchema#duration,?tEnd)
+    getCounter(?counter)
+    uriConcat(event: dr05_ ?counter ?name)
+    uriConcat(event: tCreationDr05_ ?counter ?creationTime)
+    uriConcat(event: deadlineDr05_ ?counter ?teTend)
+
+    ->
+
+    (?name rdf:type event:DeonticRelation)
+    (?creationTime rdf:type time:Instant)
+    (?creationTime time:inXSDDateTimeStamp ?t1)
+    (?teTend rdf:type time:Instant)
+    (?teTend time:inXSDDateTimeStamp ?tEnd)
+    (?name event:creationTime ?creationTime)
+    (?name event:end ?teTend)
+    (?name event:isGenerated event:norm05)
+    (?name event:activated ?e1)
+    (?name event:debtor ?agent)
+]
+
+[PRODUCTION_NORM_VIOLATION:
+    (?salience rdf:type event:Salience)
+    (?salience event:salienceLevel ?level)
+    equal(?level 0)
+
+    (?dr rdf:type event:DeonticRelation)
+    (?dr event:isGenerated event:norm05)
+    (?dr event:activated ?e1)
+    (?dr event:end ?teTend)
+    (?teTend time:inXSDDateTimeStamp ?tEnd)
+
+    (?e1 event:affectedPerson ?agent)
+    (?e1 event:atTime ?inst1)
+    (?inst1 time:inXSDDateTimeStamp ?t1)
+
+    (?e2 rdf:type event:LeaveHouse)
+    (?e2 event:actor ?agent)
+    (?e2 event:atTime ?te2)
+    (?te2 time:inXSDDateTimeStamp ?t2)
+    (?e2 event:from ?house)
+    (?agent event:home ?house)
+
+    greaterThan(?t2 ?t1)
+    lessThan(?t2 ?tEnd)
+
+    noValue(?dr event:ExceptionToDR ?e2)
+    noValue(?dr event:violated ?t2)
+
+    ->
+
+    (?agent event:violates ?dr)
+    (?dr event:violated ?t2)
+]
+
+[PRODUCTION_NORM_FULLFILMENT:
+    (?salience rdf:type event:Salience)
+    (?salience event:salienceLevel ?level)
+    equal(?level 0)
+
+    (?dr rdf:type event:DeonticRelation)
+    (?dr event:isGenerated event:norm05)
+    (?dr event:activated ?e1)
+    (?dr event:end ?teTend)
+    (?teTend time:inXSDDateTimeStamp ?tEnd)
+
+    (?now rdf:type event:Now)
+    (?now event:in_XSD_Date-Time ?tNow)
+    greaterThan(?tNow ?tEnd)
+
+    noValue(?dr event:fulfilled)
+
+    ->
+
+    (?agent event:fulfills ?dr)
+    (?dr event:fulfilled ?teTend)
+]
+
