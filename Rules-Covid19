@@ -6,91 +6,121 @@
 
 
 [PRODUCTION_NORM05_ACTIVATION:
-    (?salience rdf:type event:Salience)
-    (?salience event:salienceLevel ?level)
-    equal(?level 0)
+    isSalience(0)
 
     (?e1 rdf:type event:PositiveTest)
     (?e1 event:affectedPerson ?agent)
     (?e1 event:atTime ?inst1)
     (?inst1 time:inXSDDateTimeStamp ?t1)
 
+    greaterThanNow(?t1)
+
     noValue(?dr event:activated ?e1)
 
     addDeadline(?t1,"P15D"^^http://www.w3.org/2001/XMLSchema#duration,?tEnd)
     getCounter(?counter)
     uriConcat(event: dr05_ ?counter ?name)
-    uriConcat(event: tCreationDr05_ ?counter ?creationTime)
-    uriConcat(event: deadlineDr05_ ?counter ?teTend)
+    uriConcat(event: tCreation_dr05_ ?counter ?creationTime)
+    uriConcat(event: deadline_dr05_ ?counter ?inst_te_end)
+    uriConcat(event: tev_end_dr05_ ?counter ?te_end)
 
     ->
 
     (?name rdf:type event:DeonticRelation)
-    (?creationTime rdf:type time:Instant)
-    (?creationTime time:inXSDDateTimeStamp ?t1)
-    (?teTend rdf:type time:Instant)
-    (?teTend time:inXSDDateTimeStamp ?tEnd)
-    (?name event:creationTime ?creationTime)
-    (?name event:end ?teTend)
+    (?te_end rdf:type event:TimeEvent)
+    (?inst_te_end rdf:type time:Instant)
+
     (?name event:isGenerated event:norm05)
     (?name event:activated ?e1)
+    (?te_end event:atTime ?inst_te_end)
+    (?inst_te_end time:inXSDDateTimeStamp ?tEnd)
+    (?name event:end ?te_end)
     (?name event:debtor ?agent)
+
+    (?creationTime rdf:type time:Instant)
+    (?creationTime time:inXSDDateTimeStamp ?t1)
+    (?name event:creationTime ?creationTime)
 ]
 
-[PRODUCTION_NORM_VIOLATION:
-    (?salience rdf:type event:Salience)
-    (?salience event:salienceLevel ?level)
-    equal(?level 0)
+[PRODUCTION_NORM05_VIOLATION:
+    isSalience(0)
 
     (?dr rdf:type event:DeonticRelation)
     (?dr event:isGenerated event:norm05)
     (?dr event:activated ?e1)
-    (?dr event:end ?teTend)
-    (?teTend time:inXSDDateTimeStamp ?tEnd)
+    (?dr event:end ?tev_end)
+    (?tev_end event:atTime ?inst_end)
+    (?inst_end time:inXSDDateTimeStamp ?tEnd)
+    (?dr event:debtor ?agent)
 
-    (?e1 event:affectedPerson ?agent)
     (?e1 event:atTime ?inst1)
     (?inst1 time:inXSDDateTimeStamp ?t1)
 
     (?e2 rdf:type event:LeaveHouse)
     (?e2 event:actor ?agent)
-    (?e2 event:atTime ?te2)
-    (?te2 time:inXSDDateTimeStamp ?t2)
+    (?e2 event:atTime ?inst2)
+    (?inst2 time:inXSDDateTimeStamp ?t2)
     (?e2 event:from ?house)
     (?agent event:home ?house)
 
     greaterThan(?t2 ?t1)
     lessThan(?t2 ?tEnd)
 
+    greaterThanNow(?t2)
+
     noValue(?dr event:ExceptionToDR ?e2)
-    noValue(?dr event:violated ?t2)
+    noValue(?dr event:violated ?e2)
 
     ->
 
     (?agent event:violates ?dr)
-    (?dr event:violated ?t2)
+    (?dr event:violated ?e2)
 ]
 
-[PRODUCTION_NORM_FULLFILMENT:
-    (?salience rdf:type event:Salience)
-    (?salience event:salienceLevel ?level)
-    equal(?level 0)
+[PRODUCTION_NORM05_FULFILLMENT:
+    isSalience(0)
 
     (?dr rdf:type event:DeonticRelation)
     (?dr event:isGenerated event:norm05)
     (?dr event:activated ?e1)
-    (?dr event:end ?teTend)
-    (?teTend time:inXSDDateTimeStamp ?tEnd)
+    (?dr event:end ?tev_end)
+    (?tev_end event:atTime ?inst_end)
+    (?inst_end time:inXSDDateTimeStamp ?tEnd)
+    (?dr event:debtor ?agent)
 
-    (?now rdf:type event:Now)
-    (?now event:in_XSD_Date-Time ?tNow)
-    greaterThan(?tNow ?tEnd)
+    greaterThanNow(?tEnd)
 
-    noValue(?dr event:fulfilled)
-
+    noValue(?dr event:ExceptionToDR ?en)
+    noValue(?dr event:fulfilled ?en)
+    noValue(?dr event:violated ?en)
     ->
 
     (?agent event:fulfills ?dr)
-    (?dr event:fulfilled ?teTend)
+    (?dr event:fulfilled ?tev_end)
 ]
 
+[PRODUCTION_NORM05_EXCEPTION01:
+    isSalience(1)
+
+    (?dr rdf:type event:DeonticRelation)
+    (?dr event:isGenerated event:norm05)
+    (?dr event:creationTime ?creationTime)
+    (?dr event:end ?tev_end)
+    (?tev_end event:atTime ?inst_end)
+    (?inst_end time:inXSDDateTimeStamp ?tEnd)
+
+    (?dr event:activated ?e1)
+    (?e1 event:affectedPerson ?agent)
+
+    (?e3 rdf:type event:Fire)
+    (?e3 event:place ?house)
+    (?agent event:home ?house)
+
+    noValue(?dr event:violates ?agent)
+
+    ->
+
+    drop(1)
+    drop(3)
+    drop(4)
+]
