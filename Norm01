@@ -42,9 +42,7 @@ THEN
     uriConcat(event: inst_end_ ?counter ?inst_end_n)
 
     noValue(tnorm:norm01 event:exceptionToNorm ?e1)
-
     ->
-
     (?dr rdf:type event:DeonticRelation)
     (?dr event:isGenerated event:norm01)
     (?dr event:activated ?e1)
@@ -63,10 +61,6 @@ THEN
     (?dr event:creationTime ?teCreation)
 
 ]
-
-
-
-
 
 [N01_ProductionRule2_FULFILL:
     isSalience(0)
@@ -121,21 +115,13 @@ THEN
 
     (?dr event:isGenerated event:norm01)
     (?dr tnorm:debtor ?agent)
-
-    (?dr event:activated ?event)
-    (?event rdf:type event:RestrictedTrafficAreaAccess)
-    (?event event:hasVehicle ?vehicle)
-    (?vehicle event:vehicleOwner ?agent)
     
     //t_end < now it means that t_end is elapsed
     greaterThanNow(?t_end)
-    getNow(?now)
-
+    
     noValue(?dr event:violated)
     noValue(?dr event:fulfilled)
-
     ->
-
     (?agent event:violates ?dr)
     (?dr event:violated ?tev_end_n)
 ]
@@ -154,9 +140,7 @@ THEN
     noValue(event:norm01 event:exceptionToException ?e1)
 
     greaterThanNow(?t1)
-
     ->
-
     (event:norm01 event:exceptionToNorm ?e1)
 ]
 
