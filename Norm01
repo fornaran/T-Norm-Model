@@ -92,7 +92,9 @@ THEN
     teGreaterThan(?t_end ?tPayment)
 
     greaterThanNow(?tPayment)
-   
+    
+    noValue(?dr event:exceptionToDR ?payment)
+     
     noValue(?dr event:violated)
     noValue(?dr event:fulfilled)
 
@@ -114,10 +116,20 @@ THEN
     (?inst_end_n time:inXSDDateTimeStamp ?t_end)
 
     (?dr event:isGenerated event:norm01)
+    (?dr event:activated ?e1)
     (?dr tnorm:debtor ?agent)
     
+    (?payment rdf:type event:Payment)
+    (?payment event:reason ?e1)
+    (?payment event:recipient event:Milan)
+    (?payment event:price 6)
+    (?payment event:priceCurrency event:euro)
+    (?payment event:actor ?agent)
+        
     //t_end < now it means that t_end is elapsed
     greaterThanNow(?t_end)
+    
+    noValue(?dr event:exceptionToDR ?payment)
     
     noValue(?dr event:violated)
     noValue(?dr event:fulfilled)
